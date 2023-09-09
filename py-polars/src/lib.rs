@@ -54,6 +54,7 @@ use crate::error::{
     NoDataError, PyPolarsErr, SchemaError, SchemaFieldNotFoundError, StructFieldNotFoundError,
 };
 use crate::expr::PyExpr;
+use crate::functions::string_cache::PyStringCacheHolder;
 use crate::lazyframe::PyLazyFrame;
 use crate::lazygroupby::PyLazyGroupBy;
 use crate::series::PySeries;
@@ -74,6 +75,7 @@ fn polars(py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<PyLazyFrame>().unwrap();
     m.add_class::<PyLazyGroupBy>().unwrap();
     m.add_class::<PyExpr>().unwrap();
+    m.add_class::<PyStringCacheHolder>().unwrap();
     #[cfg(feature = "csv")]
     m.add_class::<batched_csv::PyBatchedCsv>().unwrap();
     #[cfg(feature = "sql")]
@@ -207,8 +209,6 @@ fn polars(py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(functions::meta::get_index_type))
         .unwrap();
     m.add_wrapped(wrap_pyfunction!(functions::meta::threadpool_size))
-        .unwrap();
-    m.add_wrapped(wrap_pyfunction!(functions::string_cache::_set_string_cache))
         .unwrap();
     m.add_wrapped(wrap_pyfunction!(
         functions::string_cache::enable_string_cache
