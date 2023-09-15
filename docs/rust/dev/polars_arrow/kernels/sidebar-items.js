@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["convert_to_naive_local"],"mod":["agg_mean","atan2","comparison","concatenate","ewm","float","list","list_bytes_iter","pow","rolling","set","sort_partition","sorted_join","string","take_agg"]};
